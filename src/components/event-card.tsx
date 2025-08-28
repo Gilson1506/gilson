@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Clock } from "lucide-react";
+import { MapPin, Clock, Users } from "lucide-react";
 import { Link } from "wouter";
 import type { Event } from "@shared/schema";
 
@@ -59,13 +59,17 @@ export default function EventCard({ event }: EventCardProps) {
           {event.description.length > 100 ? `${event.description.substring(0, 100)}...` : event.description}
         </p>
         <div className="space-y-2 mb-4">
-          <div className="flex items-center text-sm">
-            <MapPin className="h-4 w-4 text-primary mr-2" />
-            <span data-testid={`text-location-${event.id}`}>{event.location}</span>
+          <div className="flex items-center text-sm text-muted-foreground mb-3">
+            <Clock className="h-4 w-4 mr-2" />
+            {new Date(event.date).toLocaleDateString('pt-BR')}
           </div>
-          <div className="flex items-center text-sm">
-            <Clock className="h-4 w-4 text-primary mr-2" />
-            <span data-testid={`text-time-${event.id}`}>{event.time}</span>
+          <div className="flex items-center text-sm text-muted-foreground mb-3">
+            <MapPin className="h-4 w-4 mr-2" />
+            {event.location}
+          </div>
+          <div className="flex items-center text-sm text-muted-foreground mb-3">
+            <Users className="h-4 w-4 mr-2" />
+            {event.maxParticipants || 0} participantes
           </div>
         </div>
         <div className="flex items-center justify-between">

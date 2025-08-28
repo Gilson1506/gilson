@@ -1,196 +1,178 @@
-import type { Event, Exhibitor, News, Contact, Ticket } from "@shared/schema";
-
-// Mock data for development and testing purposes
-// Note: The actual application uses real data from the storage layer
+import type { Event, Exhibitor, News, Contact, Ticket } from "./schema";
 
 export const mockEvents: Event[] = [
   {
-    id: "mock-1",
-    title: "Conferência Digital Brasil 2024",
-    description: "O maior evento de transformação digital do país, reunindo líderes de tecnologia e inovação.",
+    id: "1",
+    title: "Tech Summit 2024",
+    description: "A maior conferência de tecnologia do ano, reunindo especialistas e inovadores da indústria.",
+    date: "2024-12-10",
+    time: "09:00",
+    location: "Centro de Convenções de Luanda",
     category: "Tecnologia",
-    date: new Date("2024-12-10"),
-    time: "09:00 - 18:00",
-    location: "Centro de Convenções Anhembi - São Paulo, SP",
-    price: 25000, // R$ 250.00
-    imageUrl: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-    featured: false,
-    maxAttendees: 2000,
-    currentAttendees: 847,
+    organizer: "Tech Angola",
+    status: "upcoming",
+    capacity: 500,
+    attendees: 350,
+    imageUrl: "/events/tech-summit.jpg",
+    price: 50000,
+    featured: true,
+    maxParticipants: 500,
   },
   {
-    id: "mock-2",
-    title: "Expo Sustentabilidade 2024",
-    description: "Feira focada em soluções sustentáveis e economia verde para empresas.",
-    category: "Sustentabilidade",
-    date: new Date("2024-11-25"),
-    time: "10:00 - 17:00",
-    location: "Expo Center Norte - São Paulo, SP",
-    price: 0, // Gratuito
-    imageUrl: "https://images.unsplash.com/photo-1569163139394-de44aa8c2559?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-    featured: false,
-    maxAttendees: 1500,
-    currentAttendees: 623,
+    id: "2",
+    title: "Networking Empresarial",
+    description: "Evento focado em conectar empresários e profissionais de diferentes setores.",
+    date: "2024-11-25",
+    time: "18:00",
+    location: "Hotel Talatona",
+    category: "Networking",
+    organizer: "Business Connect",
+    status: "upcoming",
+    capacity: 200,
+    attendees: 120,
+    imageUrl: "/events/networking.jpg",
+    price: 25000,
+    featured: true,
+    maxParticipants: 200,
   },
+  {
+    id: "3",
+    title: "Workshop de Marketing Digital",
+    description: "Aprenda as melhores estratégias de marketing digital para impulsionar seu negócio.",
+    date: "2024-12-15",
+    time: "14:00",
+    location: "Centro de Inovação",
+    category: "Marketing",
+    organizer: "Digital Academy",
+    status: "upcoming",
+    capacity: 100,
+    attendees: 75,
+    imageUrl: "/events/marketing-workshop.jpg",
+    price: 15000,
+    featured: false,
+    maxParticipants: 100,
+  }
 ];
 
 export const mockExhibitors: Exhibitor[] = [
   {
-    id: "mock-exp-1",
-    name: "Innovation Labs",
-    description: "Laboratório de inovação especializado em soluções de IA e machine learning para empresas.",
+    id: "1",
+    name: "Tech Innovations",
+    email: "contato@techinnovations.ao",
+    location: "Luanda, Angola",
+    description: "Empresa líder em soluções tecnológicas inovadoras para o mercado africano.",
+    industry: "Tecnologia",
     category: "Inteligência Artificial",
-    employees: 75,
-    standLocation: "Stand D-12, TechFair Brazil",
-    logoUrl: "",
-    contactEmail: "contato@innovationlabs.com.br",
-    website: "https://innovationlabs.com.br",
+    website: "https://techinnovations.ao",
+    phone: "+244 123 456 789",
+    logo: "/exhibitors/tech-innovations.png",
+    boothNumber: "A1",
+    standLocation: "Pavilhão A, Stand 1",
+    employees: 150,
+    socialMedia: {
+      linkedin: "https://linkedin.com/company/techinnovations",
+      twitter: "https://twitter.com/techinnovations",
+      facebook: "https://facebook.com/techinnovations"
+    }
   },
   {
-    id: "mock-exp-2",
+    id: "2",
     name: "Green Solutions",
-    description: "Consultoria em sustentabilidade empresarial e soluções ecológicas inovadoras.",
-    category: "Sustentabilidade",
-    employees: 120,
-    standLocation: "Stand E-05, Expo Sustentabilidade",
-    logoUrl: "",
-    contactEmail: "info@greensolutions.com.br",
-    website: "https://greensolutions.com.br",
-  },
+    email: "info@greensolutions.ao",
+    location: "Benguela, Angola",
+    description: "Especialistas em soluções sustentáveis e energia renovável.",
+    industry: "Sustentabilidade",
+    category: "Energia Renovável",
+    website: "https://greensolutions.ao",
+    phone: "+244 987 654 321",
+    logo: "/exhibitors/green-solutions.png",
+    boothNumber: "B2",
+    standLocation: "Pavilhão B, Stand 2",
+    employees: 80,
+    socialMedia: {
+      linkedin: "https://linkedin.com/company/greensolutions",
+      twitter: "https://twitter.com/greensolutions"
+    }
+  }
 ];
 
 export const mockNews: News[] = [
   {
-    id: "mock-news-1",
-    title: "Mercado de Eventos Corporativos Cresce 25% em 2024",
-    excerpt: "Setor registra forte recuperação pós-pandemia com foco em eventos híbridos e sustentáveis.",
-    content: "O mercado brasileiro de eventos corporativos apresentou crescimento significativo...",
-    category: "Mercado",
-    publishDate: new Date("2024-11-10"),
-    imageUrl: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=300",
-    featured: false,
+    id: "1",
+    title: "Tecnologia Revoluciona o Mercado Angolano",
+    content: "A adoção de novas tecnologias está transformando rapidamente o cenário empresarial em Angola, criando oportunidades sem precedentes para inovação e crescimento.",
+    category: "Tecnologia",
+    author: "Maria Silva",
+    publishDate: "2024-11-10",
+    imageUrl: "/news/tech-revolution.jpg",
+    tags: ["tecnologia", "inovação", "mercado"],
+    featured: true,
+    excerpt: "A adoção de novas tecnologias está transformando rapidamente o cenário empresarial em Angola..."
   },
+  {
+    id: "2",
+    title: "Eventos Corporativos em Ascensão",
+    content: "O mercado de eventos corporativos em Angola registrou crescimento recorde no último trimestre, impulsionado pela retomada das atividades presenciais.",
+    category: "Eventos",
+    author: "João Santos",
+    publishDate: "2024-11-08",
+    imageUrl: "/news/corporate-events.jpg",
+    tags: ["eventos", "corporativo", "crescimento"],
+    featured: false,
+    excerpt: "O mercado de eventos corporativos em Angola registrou crescimento recorde..."
+  }
 ];
 
 export const mockContacts: Contact[] = [
   {
-    id: "mock-contact-1",
-    name: "João Silva",
-    email: "joao@empresa.com.br",
+    id: "1",
+    name: "Ana Costa",
+    email: "ana.costa@empresa.ao",
+    message: "Gostaria de obter mais informações sobre os próximos eventos.",
+    subject: "Informações sobre Eventos",
+    createdAt: "2024-11-15",
     company: "Tech Innovations",
-    phone: "(11) 98765-4321",
-    subject: "Parceria comercial",
-    message: "Gostaria de discutir oportunidades de parceria para eventos de tecnologia.",
-    submittedAt: new Date("2024-11-15"),
   },
+  {
+    id: "2",
+    name: "Carlos Mendes",
+    email: "carlos.mendes@startup.ao",
+    message: "Interessado em participar como expositor no próximo evento.",
+    subject: "Participação como Expositor",
+    createdAt: "2024-11-14",
+  }
 ];
 
 export const mockTickets: Ticket[] = [
   {
-    id: "mock-ticket-1",
-    eventId: "mock-1",
-    attendeeName: "Maria Santos",
-    attendeeEmail: "maria@email.com",
-    ticketType: "professional",
-    price: 35000,
-    qrCode: "QR-1731668400000-ABC123",
-    purchaseDate: new Date("2024-11-15"),
-  },
-];
-
-// Utility functions for working with mock data
-export const getMockEventById = (id: string): Event | undefined => {
-  return mockEvents.find(event => event.id === id);
-};
-
-export const getMockExhibitorById = (id: string): Exhibitor | undefined => {
-  return mockExhibitors.find(exhibitor => exhibitor.id === id);
-};
-
-export const getMockEventsByCategory = (category: string): Event[] => {
-  return mockEvents.filter(event => event.category === category);
-};
-
-export const getMockFeaturedEvents = (): Event[] => {
-  return mockEvents.filter(event => event.featured);
-};
-
-// Price formatting utility
-export const formatPrice = (priceInCents: number): string => {
-  if (priceInCents === 0) return "Gratuito";
-  return `R$ ${(priceInCents / 100).toFixed(0)}`;
-};
-
-// Date formatting utility
-export const formatDate = (date: Date): string => {
-  return date.toLocaleDateString('pt-BR', {
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric'
-  });
-};
-
-// Event categories for filtering
-export const eventCategories = [
-  "Todos",
-  "Negócios", 
-  "Tecnologia",
-  "Educação",
-  "Cultura",
-  "Sustentabilidade",
-  "Inovação"
-];
-
-// Exhibitor categories for filtering  
-export const exhibitorCategories = [
-  "Todas as Categorias",
-  "Tecnologia",
-  "Business Intelligence", 
-  "Segurança Digital",
-  "Consultoria",
-  "Fintech",
-  "Healthcare",
-  "Inteligência Artificial",
-  "Sustentabilidade"
-];
-
-// News categories
-export const newsCategories = [
-  "Tendências",
-  "Inovação", 
-  "Sustentabilidade",
-  "Networking",
-  "Mercado",
-  "Tecnologia"
-];
-
-// Contact subjects
-export const contactSubjects = [
-  "Informações sobre eventos",
-  "Parceria comercial",
-  "Suporte técnico", 
-  "Organização de evento personalizado",
-  "Outros"
-];
-
-// Ticket types with pricing
-export const ticketTypes = [
-  {
-    id: "visitor",
-    name: "Visitante",
-    basePrice: 15000, // R$ 150.00
-    description: "Acesso básico ao evento"
+    id: "1",
+    status: "confirmed",
+    eventId: "1",
+    attendeeName: "Maria Silva",
+    attendeeEmail: "maria.silva@email.ao",
+    ticketType: "vip",
+    quantity: 1,
+    totalPrice: 50000,
+    purchaseDate: "2024-11-15",
+    qrCode: "QR123456789",
   },
   {
-    id: "professional", 
-    name: "Profissional",
-    basePrice: 35000, // R$ 350.00
-    description: "Experiência completa"
-  },
-  {
-    id: "vip",
-    name: "VIP", 
-    basePrice: 65000, // R$ 650.00
-    description: "Acesso exclusivo"
+    id: "2",
+    status: "pending",
+    eventId: "2",
+    attendeeName: "João Santos",
+    attendeeEmail: "joao.santos@email.ao",
+    ticketType: "standard",
+    quantity: 2,
+    totalPrice: 50000,
+    purchaseDate: "2024-11-14",
   }
 ];
+
+export function getFeaturedEvents(): Event[] {
+  return mockEvents.filter(event => event.featured);
+}
+
+export function getUpcomingEvents(): Event[] {
+  return mockEvents.filter(event => event.status === "upcoming");
+}

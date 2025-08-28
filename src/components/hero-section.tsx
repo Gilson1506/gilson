@@ -1,131 +1,106 @@
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Link } from "wouter";
-import { ChevronLeft, ChevronRight, Play, Users, Calendar } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-
-const heroSlides = [
-  {
-    id: 1,
-    image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&h=800",
-    title: "Conectando Negócios",
-    subtitle: "Criando Oportunidades",
-    description: "A maior plataforma de eventos corporativos do Brasil",
-    primaryAction: { text: "Próximos Eventos", link: "/events" },
-    secondaryAction: { text: "Inscreva-se Agora", link: "/tickets" }
-  },
-  {
-    id: 2,
-    image: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&h=800",
-    title: "Tecnologia e Inovação",
-    subtitle: "Transformando o Futuro",
-    description: "Eventos que conectam startups, investidores e grandes corporações",
-    primaryAction: { text: "Eventos Tech", link: "/events" },
-    secondaryAction: { text: "Ver Expositores", link: "/exhibitors" }
-  },
-  {
-    id: 3,
-    image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&h=800",
-    title: "Networking Premium",
-    subtitle: "Conexões que Importam",
-    description: "Encontre parceiros, clientes e oportunidades de negócio",
-    primaryAction: { text: "Fazer Networking", link: "/events" },
-    secondaryAction: { text: "Contato", link: "/contact" }
-  }
-];
+import { Play, Pause } from "lucide-react";
 
 export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
-  useEffect(() => {
-    if (!isPaused) {
-      const interval = setInterval(() => {
-        setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-      }, 5000);
-      return () => clearInterval(interval);
+  const slides = [
+    {
+      id: 1,
+      image: "/backgraund.jpg",
+      title: "Conectando Profissionais",
+      subtitle: "A maior plataforma de networking corporativo de Angola",
+      description: "Participe de eventos exclusivos e conecte-se com líderes da indústria"
+    },
+    {
+      id: 2,
+      image: "/section1.jpg",
+      title: "Eventos de Qualidade",
+      subtitle: "Conferências e workshops de alto nível",
+      description: "Aprenda com especialistas e expanda sua rede profissional"
+    },
+    {
+      id: 3,
+      image: "/section2.jpg",
+      title: "Networking Estratégico",
+      subtitle: "Construa relacionamentos duradouros",
+      description: "Encontre parceiros de negócio e oportunidades únicas"
     }
-  }, [isPaused]);
+  ];
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-  };
+  useEffect(() => {
+    if (isPaused) return;
+    
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 5000);
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
-  };
+    return () => clearInterval(interval);
+  }, [isPaused, slides.length]);
 
-  const goToSlide = (index: number) => {
-    setCurrentSlide(index);
+  const togglePause = () => {
+    setIsPaused(!isPaused);
   };
 
   return (
-    <section className="relative h-96 sm:h-[500px] lg:h-[600px] overflow-hidden">
+    <section className="relative h-screen overflow-hidden">
       <AnimatePresence mode="wait">
         <motion.div
           key={currentSlide}
+          className="absolute inset-0"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.7 }}
-          className="absolute inset-0"
+          transition={{ duration: 1 }}
         >
-          <img 
-            src={heroSlides[currentSlide].image}
-            alt={heroSlides[currentSlide].title}
-            className="w-full h-full object-cover"
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url(${slides[currentSlide].image})` }}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30"></div>
+          <div className="absolute inset-0 bg-black/50" />
         </motion.div>
       </AnimatePresence>
 
-      {/* Content */}
-      <div className="absolute inset-0 flex items-center justify-center z-10">
-        <div className="text-center text-white max-w-5xl mx-auto px-4">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentSlide}
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -20, opacity: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <motion.h1 
-                className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-4" 
-                data-testid="text-hero-title"
-                initial={{ scale: 0.9 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-              >
-                {heroSlides[currentSlide].title}<br/>
-                <span className="text-accent bg-gradient-to-r from-accent to-orange-400 bg-clip-text text-transparent">
-                  {heroSlides[currentSlide].subtitle}
-                </span>
-              </motion.h1>
-              
-              <motion.p 
-                className="text-xl sm:text-2xl mb-8 text-gray-200" 
-                data-testid="text-hero-subtitle"
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-              >
-                {heroSlides[currentSlide].description}
-              </motion.p>
-
-              {/* Stats removidos */}
-              
-              {/* CTA removidos */}
-            </motion.div>
-          </AnimatePresence>
+      <div className="relative z-10 flex items-center justify-center h-full text-center text-white px-4">
+        <div className="max-w-4xl">
+          <motion.h1 
+            className="text-4xl md:text-6xl font-bold mb-6"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            {slides[currentSlide].title}
+          </motion.h1>
+          <motion.h2 
+            className="text-xl md:text-2xl mb-4 text-primary-200"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            {slides[currentSlide].subtitle}
+          </motion.h2>
+          <motion.p 
+            className="text-lg md:text-xl mb-8 text-gray-300"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            {slides[currentSlide].description}
+          </motion.p>
         </div>
       </div>
 
-      {/* Controles de navegação removidos */}
-
-      {/* Indicadores removidos */}
-
-      {/* Play/Pause removido */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+        <button
+          onClick={togglePause}
+          className="bg-white/20 backdrop-blur-sm text-white p-3 rounded-full hover:bg-white/30 transition-colors"
+          data-testid="button-play-pause"
+        >
+          {isPaused ? <Play className="h-6 w-6" /> : <Pause className="h-6 w-6" />}
+        </button>
+      </div>
     </section>
   );
 }

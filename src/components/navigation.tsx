@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Phone, Mail, MapPin, Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
-import { useScroll } from "@/hooks/use-scroll";
+import { Menu, X, Phone, MapPin, Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 
 export default function Navigation() {
   const [location] = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { isScrolled } = useScroll();
 
   const navItems = [
     { href: "/", label: "Início", active: location === "/" },

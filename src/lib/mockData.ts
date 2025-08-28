@@ -1,76 +1,105 @@
 import type { Event, News } from "./schema";
 
-export const mockNews: News[] = [
+export const mockEvents: Event[] = [
   {
-    id: 1,
-    title: "Networking Digital: O Futuro das Conexões Profissionais",
-    content: "Descubra como a tecnologia está revolucionando a forma como nos conectamos e construímos relacionamentos profissionais no mundo digital.",
-    imageUrl: "/news/networking-digital.jpg",
-    publishedAt: new Date().toISOString(),
-    author: "Equipe Editorial",
-    category: "Tecnologia"
+    id: "1",
+    title: "Tech Summit 2024",
+    description: "A maior conferência de tecnologia do ano, reunindo especialistas e inovadores da indústria.",
+    date: "2024-12-10",
+    time: "09:00",
+    location: "Centro de Convenções de Luanda",
+    category: "Tecnologia",
+    organizer: "Tech Angola",
+    status: "upcoming",
+    capacity: 500,
+    attendees: 350,
+    imageUrl: "/events/tech-summit.jpg",
+    price: 50000,
+    featured: true,
+    maxParticipants: 500,
   },
   {
-    id: 2,
-    title: "Eventos Híbridos: A Nova Era dos Encontros Corporativos",
-    content: "A combinação de eventos presenciais e virtuais está criando experiências únicas e acessíveis para todos os participantes.",
-    imageUrl: "/news/eventos-hibridos.jpg",
-    publishedAt: new Date(Date.now() - 86400000).toISOString(),
-    author: "Equipe Editorial",
-    category: "Eventos"
+    id: "2",
+    title: "Networking Empresarial",
+    description: "Evento focado em conectar empresários e profissionais de diferentes setores.",
+    date: "2024-11-25",
+    time: "18:00",
+    location: "Hotel Talatona",
+    category: "Networking",
+    organizer: "Business Connect",
+    status: "upcoming",
+    capacity: 200,
+    attendees: 120,
+    imageUrl: "/events/networking.jpg",
+    price: 25000,
+    featured: true,
+    maxParticipants: 200,
   },
   {
-    id: 3,
-    title: "Como Construir uma Rede de Contatos Eficiente",
-    content: "Estratégias comprovadas para desenvolver e manter relacionamentos profissionais que impulsionam sua carreira.",
-    imageUrl: "/news/rede-contatos.jpg",
-    publishedAt: new Date(Date.now() - 172800000).toISOString(),
-    author: "Equipe Editorial",
-    category: "Carreira"
+    id: "3",
+    title: "Workshop de Marketing Digital",
+    description: "Aprenda as melhores estratégias de marketing digital para impulsionar seu negócio.",
+    date: "2024-12-15",
+    time: "14:00",
+    location: "Centro de Inovação",
+    category: "Marketing",
+    organizer: "Digital Academy",
+    status: "upcoming",
+    capacity: 100,
+    attendees: 75,
+    imageUrl: "/events/marketing-workshop.jpg",
+    price: 15000,
+    featured: false,
+    maxParticipants: 100,
   }
 ];
 
-export const mockEvents: Event[] = [
+export const mockNews: News[] = [
   {
-    id: 1,
-    title: "TechConnect 2024",
-    description: "O maior evento de tecnologia e networking do ano, reunindo profissionais e empresas do setor.",
-    date: new Date(Date.now() + 86400000 * 7).toISOString(),
-    time: "09:00 - 18:00",
-    location: "Centro de Convenções São Paulo",
-    maxAttendees: 500,
-    imageUrl: "/events/techconnect-2024.jpg",
+    id: "1",
+    title: "Tecnologia Revoluciona o Mercado Angolano",
+    content: "A adoção de novas tecnologias está transformando rapidamente o cenário empresarial em Angola, criando oportunidades sem precedentes para inovação e crescimento.",
     category: "Tecnologia",
-    price: 299.99,
-    featured: true
+    author: "Maria Silva",
+    publishDate: "2024-11-10",
+    imageUrl: "/news/tech-revolution.jpg",
+    tags: ["tecnologia", "inovação", "mercado"],
+    featured: true,
+    excerpt: "A adoção de novas tecnologias está transformando rapidamente o cenário empresarial em Angola..."
   },
   {
-    id: 2,
-    title: "Business Networking Summit",
-    description: "Conecte-se com líderes empresariais e descubra novas oportunidades de negócio.",
-    date: new Date(Date.now() + 86400000 * 14).toISOString(),
-    time: "14:00 - 20:00",
-    location: "Hotel Grand Plaza",
-    maxAttendees: 200,
-    imageUrl: "/events/business-summit.jpg",
-    category: "Negócios",
-    price: 199.99,
-    featured: true
+    id: "2",
+    title: "Eventos Corporativos em Ascensão",
+    content: "O mercado de eventos corporativos em Angola registrou crescimento recorde no último trimestre, impulsionado pela retomada das atividades presenciais.",
+    category: "Eventos",
+    author: "João Santos",
+    publishDate: "2024-11-08",
+    imageUrl: "/news/corporate-events.jpg",
+    tags: ["eventos", "corporativo", "crescimento"],
+    featured: false,
+    excerpt: "O mercado de eventos corporativos em Angola registrou crescimento recorde..."
   },
   {
-    id: 3,
-    title: "Startup Meetup",
-    description: "Encontro para empreendedores e investidores do ecossistema de startups brasileiro.",
-    date: new Date(Date.now() + 86400000 * 21).toISOString(),
-    time: "19:00 - 22:00",
-    location: "WeWork Paulista",
-    maxAttendees: 100,
-    imageUrl: "/events/startup-meetup.jpg",
-    category: "Empreendedorismo",
-    price: 99.99,
-    featured: false
+    id: "3",
+    title: "Inovação Sustentável",
+    content: "Empresas angolanas estão liderando o caminho em soluções sustentáveis e práticas empresariais responsáveis.",
+    category: "Sustentabilidade",
+    author: "Ana Costa",
+    publishDate: "2024-11-05",
+    imageUrl: "/news/sustainable-innovation.jpg",
+    tags: ["sustentabilidade", "inovação", "responsabilidade"],
+    featured: false,
+    excerpt: "Empresas angolanas estão liderando o caminho em soluções sustentáveis..."
   }
 ];
+
+export function getFeaturedEvents(): Event[] {
+  return mockEvents.filter(event => event.featured);
+}
+
+export function getUpcomingEvents(): Event[] {
+  return mockEvents.filter(event => event.status === "upcoming");
+}
 
 export const teamMembers = [
   {

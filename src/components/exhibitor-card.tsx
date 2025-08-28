@@ -2,6 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MapPin, Users, Laptop, TrendingUp, Shield } from "lucide-react";
 import type { Exhibitor } from "@shared/schema";
+import { Badge } from "@/components/ui/badge";
 
 interface ExhibitorCardProps {
   exhibitor: Exhibitor;
@@ -37,6 +38,14 @@ export default function ExhibitorCard({ exhibitor }: ExhibitorCardProps) {
   return (
     <Card className="rounded-xl shadow-lg border border-border p-6 hover:shadow-xl transition-shadow" data-testid={`card-exhibitor-${exhibitor.id}`}>
       <CardContent className="p-0">
+        <div className="flex items-center justify-between mb-3">
+          <Badge variant="secondary" className="text-xs">
+            {exhibitor.industry}
+          </Badge>
+          <Badge variant="outline" className="text-xs">
+            {exhibitor.industry}
+          </Badge>
+        </div>
         <div className="flex items-center mb-4">
           <div className={`${getCategoryColor(exhibitor.category)} p-3 rounded-lg mr-4`}>
             {getCategoryIcon(exhibitor.category)}
@@ -54,18 +63,14 @@ export default function ExhibitorCard({ exhibitor }: ExhibitorCardProps) {
           {exhibitor.description}
         </p>
         <div className="space-y-2 mb-4">
-          {exhibitor.standLocation && (
-            <div className="flex items-center text-sm">
-              <MapPin className="h-4 w-4 text-primary mr-2" />
-              <span data-testid={`text-stand-${exhibitor.id}`}>{exhibitor.standLocation}</span>
-            </div>
-          )}
-          {exhibitor.employees && (
-            <div className="flex items-center text-sm">
-              <Users className="h-4 w-4 text-primary mr-2" />
-              <span data-testid={`text-employees-${exhibitor.id}`}>{exhibitor.employees}+ funcionários</span>
-            </div>
-          )}
+          <div className="flex items-center text-sm text-muted-foreground mb-2">
+            <MapPin className="h-4 w-4 mr-2" />
+            {exhibitor.location}
+          </div>
+          <div className="flex items-center text-sm text-muted-foreground mb-2">
+            <Users className="h-4 w-4 mr-2" />
+            {exhibitor.industry} • {exhibitor.location}
+          </div>
         </div>
         <div className="flex gap-2">
           <Button 

@@ -1,92 +1,101 @@
 import { z } from "zod";
 
 // Event Schema
-export const eventSchema = z.object({
+export const EventSchema = z.object({
   id: z.string(),
   title: z.string(),
   description: z.string(),
   date: z.string(),
   time: z.string(),
   location: z.string(),
+  category: z.string(),
+  organizer: z.string(),
+  status: z.enum(["upcoming", "ongoing", "completed", "cancelled"]),
   capacity: z.number(),
   attendees: z.number(),
   imageUrl: z.string().optional(),
-  category: z.string(),
   price: z.number().optional(),
-  organizer: z.string(),
-  status: z.enum(["upcoming", "ongoing", "completed", "cancelled"]),
+  featured: z.boolean().optional(),
+  maxParticipants: z.number().optional(),
 });
 
-export const insertEventSchema = eventSchema.omit({ id: true });
-
-export type Event = z.infer<typeof eventSchema>;
-
 // Exhibitor Schema
-export const exhibitorSchema = z.object({
+export const ExhibitorSchema = z.object({
   id: z.string(),
   name: z.string(),
+  email: z.string(),
+  location: z.string(),
   description: z.string(),
   industry: z.string(),
-  website: z.string().url().optional(),
-  email: z.string().email(),
+  category: z.string().optional(),
+  website: z.string().optional(),
   phone: z.string().optional(),
-  location: z.string(),
   logo: z.string().optional(),
   boothNumber: z.string().optional(),
+  standLocation: z.string().optional(),
+  employees: z.number().optional(),
   socialMedia: z.object({
-    linkedin: z.string().url().optional(),
-    twitter: z.string().url().optional(),
-    facebook: z.string().url().optional(),
+    linkedin: z.string().optional(),
+    twitter: z.string().optional(),
+    facebook: z.string().optional(),
   }).optional(),
 });
 
-export const insertExhibitorSchema = exhibitorSchema.omit({ id: true });
-
-export type Exhibitor = z.infer<typeof exhibitorSchema>;
-
 // News Schema
-export const newsSchema = z.object({
+export const NewsSchema = z.object({
   id: z.string(),
   title: z.string(),
   content: z.string(),
+  category: z.string(),
   author: z.string(),
   publishDate: z.string(),
   imageUrl: z.string().optional(),
-  category: z.string(),
   tags: z.array(z.string()).optional(),
+  featured: z.boolean().optional(),
+  excerpt: z.string().optional(),
 });
-
-export const insertNewsSchema = newsSchema.omit({ id: true });
-
-export type News = z.infer<typeof newsSchema>;
 
 // Contact Schema
-export const contactSchema = z.object({
+export const ContactSchema = z.object({
   id: z.string(),
-  name: z.string().min(2, "Nome deve ter pelo menos 2 caracteres"),
-  email: z.string().email("Email inválido"),
-  subject: z.string().min(5, "Assunto deve ter pelo menos 5 caracteres"),
-  message: z.string().min(10, "Mensagem deve ter pelo menos 10 caracteres"),
+  name: z.string(),
+  email: z.string(),
+  message: z.string(),
+  subject: z.string(),
   createdAt: z.string(),
+  company: z.string().optional(),
 });
-
-export const insertContactSchema = contactSchema.omit({ id: true, createdAt: true });
-
-export type Contact = z.infer<typeof contactSchema>;
 
 // Ticket Schema
-export const ticketSchema = z.object({
+export const TicketSchema = z.object({
   id: z.string(),
-  eventId: z.string(),
-  attendeeName: z.string().min(2, "Nome deve ter pelo menos 2 caracteres"),
-  attendeeEmail: z.string().email("Email inválido"),
-  ticketType: z.enum(["vip", "standard", "student"]),
-  quantity: z.number().min(1, "Quantidade deve ser pelo menos 1"),
-  totalPrice: z.number().min(0, "Preço deve ser positivo"),
   status: z.enum(["pending", "confirmed", "cancelled"]),
+  eventId: z.string(),
+  attendeeName: z.string(),
+  attendeeEmail: z.string(),
+  ticketType: z.enum(["vip", "standard", "student", "professional"]),
+  quantity: z.number(),
+  totalPrice: z.number(),
   purchaseDate: z.string(),
+  qrCode: z.string().optional(),
 });
 
-export const insertTicketSchema = ticketSchema.omit({ id: true, purchaseDate: true });
+// Team Member Schema
+export const TeamMemberSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  role: z.string(),
+  image: z.string().optional(),
+  description: z.string(),
+  social: z.object({
+    linkedin: z.string().optional(),
+    twitter: z.string().optional(),
+  }).optional(),
+});
 
-export type Ticket = z.infer<typeof ticketSchema>;
+export type Event = z.infer<typeof EventSchema>;
+export type Exhibitor = z.infer<typeof ExhibitorSchema>;
+export type News = z.infer<typeof NewsSchema>;
+export type Contact = z.infer<typeof ContactSchema>;
+export type Ticket = z.infer<typeof TicketSchema>;
+export type TeamMember = z.infer<typeof TeamMemberSchema>;
