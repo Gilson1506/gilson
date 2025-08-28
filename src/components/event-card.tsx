@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Clock, Users } from "lucide-react";
+import { MapPin, Clock, Users, DollarSign } from "lucide-react";
 import { Link } from "wouter";
 import type { Event } from "@shared/schema";
 
@@ -10,19 +10,6 @@ interface EventCardProps {
 }
 
 export default function EventCard({ event }: EventCardProps) {
-  const formatPrice = (priceInCents: number) => {
-    if (priceInCents === 0) return "Gratuito";
-    return `R$ ${(priceInCents / 100).toFixed(0)}`;
-  };
-
-  const formatDate = (date: Date) => {
-    return new Date(date).toLocaleDateString('pt-BR', {
-      day: '2-digit',
-      month: 'short',
-      year: 'numeric'
-    });
-  };
-
   const getCategoryColor = (category: string) => {
     switch (category.toLowerCase()) {
       case 'negócios':
@@ -49,7 +36,11 @@ export default function EventCard({ event }: EventCardProps) {
             {event.category}
           </Badge>
           <span className="text-muted-foreground text-sm" data-testid={`text-date-${event.id}`}>
-            {formatDate(event.date)}
+            {new Date(event.date).toLocaleDateString('pt-BR', {
+              day: '2-digit',
+              month: 'short',
+              year: 'numeric'
+            })}
           </span>
         </div>
         <h3 className="text-xl font-bold mb-2" data-testid={`text-title-${event.id}`}>
@@ -69,12 +60,16 @@ export default function EventCard({ event }: EventCardProps) {
           </div>
           <div className="flex items-center text-sm text-muted-foreground mb-3">
             <Users className="h-4 w-4 mr-2" />
-            {event.maxParticipants || 0} participantes
+            {event.maxParticipants || event.capacity || 0} participantes
+          </div>
+          <div className="flex items-center text-sm text-muted-foreground mb-3">
+            <DollarSign className="h-4 w-4 mr-2" />
+            {event.price ? `$${event.price.toLocaleString()}` : "Gratuito"}
           </div>
         </div>
         <div className="flex items-center justify-between">
           <span className="text-2xl font-bold text-primary" data-testid={`text-price-${event.id}`}>
-            {formatPrice(event.price)}
+            {event.price ? `$${event.price.toLocaleString()}` : "Gratuito"}
           </span>
           <Link href={`/events/${event.id}`}>
             <Button 

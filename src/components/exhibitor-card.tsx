@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { MapPin, Users, Laptop, TrendingUp, Shield } from "lucide-react";
+import { MapPin, Users, Laptop, TrendingUp, Shield, Building } from "lucide-react";
 import type { Exhibitor } from "@shared/schema";
 import { Badge } from "@/components/ui/badge";
 
@@ -9,32 +9,6 @@ interface ExhibitorCardProps {
 }
 
 export default function ExhibitorCard({ exhibitor }: ExhibitorCardProps) {
-  const getCategoryIcon = (category: string) => {
-    switch (category.toLowerCase()) {
-      case 'tecnologia':
-        return <Laptop className="text-white text-xl" />;
-      case 'business intelligence':
-        return <TrendingUp className="text-white text-xl" />;
-      case 'segurança digital':
-        return <Shield className="text-white text-xl" />;
-      default:
-        return <Laptop className="text-white text-xl" />;
-    }
-  };
-
-  const getCategoryColor = (category: string) => {
-    switch (category.toLowerCase()) {
-      case 'tecnologia':
-        return 'bg-primary';
-      case 'business intelligence':
-        return 'bg-accent';
-      case 'segurança digital':
-        return 'bg-green-500';
-      default:
-        return 'bg-primary';
-    }
-  };
-
   return (
     <Card className="rounded-xl shadow-lg border border-border p-6 hover:shadow-xl transition-shadow" data-testid={`card-exhibitor-${exhibitor.id}`}>
       <CardContent className="p-0">
@@ -47,8 +21,8 @@ export default function ExhibitorCard({ exhibitor }: ExhibitorCardProps) {
           </Badge>
         </div>
         <div className="flex items-center mb-4">
-          <div className={`${getCategoryColor(exhibitor.category)} p-3 rounded-lg mr-4`}>
-            {getCategoryIcon(exhibitor.category)}
+          <div className="bg-primary/10 p-3 rounded-lg mr-4">
+            <Building className="h-6 w-6 text-primary" />
           </div>
           <div>
             <h3 className="text-xl font-bold" data-testid={`text-name-${exhibitor.id}`}>

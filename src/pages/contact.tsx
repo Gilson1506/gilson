@@ -1,16 +1,12 @@
 import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useToast } from "@/hooks/use-toast";
-import { MapPin, Phone, Mail, Clock, MessageCircle, Send, CheckCircle, Users, Building } from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Mail, Phone, MapPin, Clock, Send, CheckCircle } from "lucide-react";
 import { motion } from "framer-motion";
-import { apiRequest } from "@/lib/queryClient";
-import { insertContactSchema } from "@shared/schema";
+import { ContactSchema } from "@/lib/schema";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -35,7 +31,6 @@ const itemVariants = {
 };
 
 export default function Contact() {
-  const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -43,35 +38,6 @@ export default function Contact() {
     phone: "",
     subject: "",
     message: "",
-  });
-
-  const contactMutation = useMutation({
-    mutationFn: async (data: typeof formData) => {
-      const validatedData = insertContactSchema.parse(data);
-      const response = await apiRequest('POST', '/api/contacts', validatedData);
-      return response.json();
-    },
-    onSuccess: () => {
-      toast({
-        title: "Mensagem enviada com sucesso!",
-        description: "Entraremos em contato em breve.",
-      });
-      setFormData({
-        name: "",
-        email: "",
-        company: "",
-        phone: "",
-        subject: "",
-        message: "",
-      });
-    },
-    onError: () => {
-      toast({
-        title: "Erro ao enviar mensagem",
-        description: "Tente novamente mais tarde.",
-        variant: "destructive",
-      });
-    },
   });
 
   const handleSubmit = (e: React.FormEvent) => {

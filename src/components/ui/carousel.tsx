@@ -26,11 +26,13 @@ const Carousel = React.forwardRef<
   const [canScrollNext, setCanScrollNext] = React.useState(false)
 
   const scrollNext = React.useCallback(() => {
-    // Implement scroll logic here
+    setCanScrollNext(false)
+    setCanScrollPrev(true)
   }, [])
 
   const scrollPrev = React.useCallback(() => {
-    // Implement scroll logic here
+    setCanScrollPrev(false)
+    setCanScrollNext(true)
   }, [])
 
   return (

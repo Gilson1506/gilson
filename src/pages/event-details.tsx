@@ -64,11 +64,11 @@ export default function EventDetails() {
   const getTicketPrice = (type: string): number => {
     switch (type) {
       case "professional":
-        return event ? event.price + 20000 : 35000; // Add R$ 200
+        return event ? (event.price || 0) + 20000 : 35000; // Add $200
       case "vip":
-        return event ? event.price + 30000 : 65000; // Add R$ 300
+        return event ? (event.price || 0) + 30000 : 65000; // Add $300
       default:
-        return event?.price || 15000;
+        return event ? (event.price || 0) + 15000 : 15000;
     }
   };
 
@@ -167,7 +167,7 @@ export default function EventDetails() {
                   <div className="flex items-center">
                     <Calendar className="h-5 w-5 text-primary mr-3" />
                     <span className="font-medium mr-2">Data:</span>
-                    <span data-testid="text-event-date">{formatDate(event.date)}</span>
+                    <span data-testid="text-event-date">{new Date(event.date).toLocaleDateString('pt-BR')}</span>
                   </div>
                   <div className="flex items-center">
                     <Clock className="h-5 w-5 text-primary mr-3" />
@@ -183,7 +183,7 @@ export default function EventDetails() {
                     <Users className="h-5 w-5 text-primary mr-3" />
                     <span className="font-medium mr-2">Participantes:</span>
                     <span data-testid="text-event-attendees">
-                      {event.currentAttendees || 0} / {event.maxAttendees || "∞"}
+                      {event.attendees || 0} / {event.capacity || "∞"}
                     </span>
                   </div>
                 </div>
