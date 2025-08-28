@@ -77,15 +77,6 @@ export default function EventDetails() {
     return `R$ ${(priceInCents / 100).toFixed(0)}`;
   };
 
-  const formatDate = (date: string) => {
-    return new Date(date).toLocaleDateString('pt-BR', {
-      weekday: 'long',
-      day: '2-digit',
-      month: 'long',
-      year: 'numeric'
-    });
-  };
-
   const handleTicketPurchase = (e: React.FormEvent) => {
     e.preventDefault();
     if (!ticketData.attendeeName || !ticketData.attendeeEmail) {

@@ -14,15 +14,6 @@ export default function News() {
     queryKey: ['/api/news?featured=true'],
   });
 
-  const formatDate = (date: Date | null | undefined) => {
-    if (!date) return '';
-    return new Date(date).toLocaleDateString('pt-BR', {
-      day: '2-digit',
-      month: 'long',
-      year: 'numeric'
-    });
-  };
-
   const getCategoryColor = (category: string) => {
     switch (category.toLowerCase()) {
       case 'tendências':
