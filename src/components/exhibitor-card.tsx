@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { MapPin, Users, Laptop, TrendingUp, Shield, Building } from "lucide-react";
+import { MapPin, Users, Building } from "lucide-react";
 import type { Exhibitor } from "@shared/schema";
 import { Badge } from "@/components/ui/badge";
 

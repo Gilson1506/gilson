@@ -5,7 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent } from "@/components/ui/card";
-import { Search, Building, Users, MapPin, Mail, Globe } from "lucide-react";
+import { Search, Building, Users, MapPin, Globe } from "lucide-react";
 import { motion } from "framer-motion";
 import ExhibitorCard from "@/components/exhibitor-card";
 import type { Exhibitor } from "@shared/schema";
@@ -170,7 +170,7 @@ export default function Exhibitors() {
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
               variants={containerVariants}
             >
-              {filteredExhibitors.map((exhibitor, index) => (
+              {filteredExhibitors.map((exhibitor) => (
                 <motion.div
                   key={exhibitor.id}
                   variants={itemVariants}

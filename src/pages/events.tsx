@@ -140,7 +140,7 @@ export default function Events() {
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
               variants={containerVariants}
             >
-              {filteredEvents.map((event, index) => (
+              {filteredEvents.map((event) => (
                 <motion.div
                   key={event.id}
                   variants={itemVariants}
@@ -212,7 +212,7 @@ export default function Events() {
           {[
             { icon: Calendar, count: filteredEvents?.length || 0, label: "Eventos Disponíveis" },
             { icon: MapPin, count: new Set(events?.map(e => e.location)).size || 0, label: "Locais Diferentes" },
-            { icon: Users, count: events?.reduce((sum, e) => sum + (e.maxAttendees || 0), 0) || 0, label: "Vagas Totais" }
+            { icon: Users, count: events?.reduce((sum, e) => sum + (e.capacity || 0), 0) || 0, label: "Vagas Totais" }
           ].map((stat, index) => (
             <motion.div 
               key={index}

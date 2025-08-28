@@ -183,7 +183,7 @@ function TeamSection() {
       {/* Mobile Carousel */}
       <div className="lg:hidden w-full overflow-x-auto scrollbar-hide carousel-container">
         <div className="flex gap-4 w-max px-4 pb-4">
-          {teamMembers.map((member, index) => (
+          {teamMembers.map((member) => (
             <motion.div key={member.id} variants={itemVariants} className="w-64 flex-shrink-0 carousel-item">
               <Card className="text-center p-4 hover:shadow-xl transition-all duration-300 transform hover:scale-105">
                 <CardContent className="p-0">
@@ -221,7 +221,7 @@ function TeamSection() {
       
       {/* Desktop Grid */}
       <div className="hidden lg:grid lg:grid-cols-4 gap-6">
-        {teamMembers.map((member, index) => (
+        {teamMembers.map((member) => (
           <motion.div key={member.id} variants={itemVariants}>
             <Card className="text-center p-6 hover:shadow-xl transition-all duration-300 transform hover:scale-105">
               <CardContent className="p-0">

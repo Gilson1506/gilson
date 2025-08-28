@@ -82,7 +82,7 @@ export default function News() {
                       {featuredArticle.category}
                     </Badge>
                     <span className="text-muted-foreground text-sm" data-testid="text-featured-date">
-                      {formatDate(featuredArticle.publishDate)}
+                      {new Date(featuredArticle.publishDate).toLocaleDateString('pt-BR')}
                     </span>
                   </div>
                   <h2 className="text-2xl font-bold mb-4" data-testid="text-featured-title">
@@ -129,7 +129,7 @@ export default function News() {
                         {article.category}
                       </Badge>
                       <span className="text-muted-foreground text-sm" data-testid={`text-date-${article.id}`}>
-                        {formatDate(article.publishDate)}
+                        {new Date(article.publishDate).toLocaleDateString('pt-BR')}
                       </span>
                     </div>
                     <h4 className="text-lg font-bold mb-2" data-testid={`text-title-${article.id}`}>
@@ -171,7 +171,7 @@ export default function News() {
                         {article.category}
                       </Badge>
                       <span className="text-muted-foreground text-sm" data-testid={`text-more-date-${article.id}`}>
-                        {formatDate(article.publishDate)}
+                        {new Date(article.publishDate).toLocaleDateString('pt-BR')}
                       </span>
                     </div>
                     <h3 className="text-lg font-bold mb-2" data-testid={`text-more-title-${article.id}`}>

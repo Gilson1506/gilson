@@ -10,8 +10,6 @@ export type CalendarProps = {
 
 function Calendar({
   className,
-  classNames,
-  showOutsideDays = true,
 }: CalendarProps) {
   return (
     <div className={cn("p-3", className)}>

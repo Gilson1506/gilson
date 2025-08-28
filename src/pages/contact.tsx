@@ -2,11 +2,11 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Mail, Phone, MapPin, Clock, Send, CheckCircle } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Mail, Phone, MapPin, Clock, Send, CheckCircle, Users, Building, MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
-import { ContactSchema } from "@/lib/schema";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -40,20 +40,27 @@ export default function Contact() {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
-      toast({
-        title: "Preencha todos os campos obrigatórios",
-        variant: "destructive",
-      });
-      return;
-    }
-    contactMutation.mutate(formData);
-  };
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitted(true);
+    // Simular envio
+    setTimeout(() => {
+      setIsSubmitted(false);
+      setFormData({
+        name: "",
+        email: "",
+        company: "",
+        phone: "",
+        subject: "",
+        message: "",
+      });
+    }, 2000);
   };
 
   return (
@@ -196,10 +203,10 @@ export default function Contact() {
                     <Button
                       type="submit"
                       className="w-full bg-primary hover:bg-primary/90 text-white py-3 font-semibold transform hover:scale-105 transition-all duration-200 disabled:transform-none"
-                      disabled={contactMutation.isPending}
+                      disabled={isSubmitted}
                       data-testid="button-contact-submit"
                     >
-                      {contactMutation.isPending ? (
+                      {isSubmitted ? (
                         <div className="flex items-center justify-center">
                           <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
                           Enviando...

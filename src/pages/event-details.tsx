@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams } from "wouter";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Card, CardContent } from "@/components/ui/card";
@@ -10,9 +11,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import { MapPin, Clock, Users, Calendar, QrCode } from "lucide-react";
 import { apiRequest } from "@/lib/queryClient";
-import { insertTicketSchema } from "@shared/schema";
-import { useState } from "react";
-import type { Event, Ticket } from "@shared/schema";
+import { TicketSchema } from "@/lib/schema";
+import type { Event, Ticket } from "@/lib/schema";
 
 export default function EventDetails() {
   const { id } = useParams();
@@ -40,7 +40,7 @@ export default function EventDetails() {
         price: ticketPrice,
       };
       
-      const validatedData = insertTicketSchema.parse(ticketInfo);
+      const validatedData = TicketSchema.parse(ticketInfo);
       const response = await apiRequest('POST', '/api/tickets', validatedData);
       return response.json();
     },
@@ -77,7 +77,7 @@ export default function EventDetails() {
     return `R$ ${(priceInCents / 100).toFixed(0)}`;
   };
 
-  const formatDate = (date: Date) => {
+  const formatDate = (date: string) => {
     return new Date(date).toLocaleDateString('pt-BR', {
       weekday: 'long',
       day: '2-digit',
